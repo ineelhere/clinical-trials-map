@@ -3,8 +3,8 @@ import pandas as pd
 import folium
 import folium.plugins as plugins
 
-def myfunc(condition, location):
-    url = f"https://clinicaltrials.gov/api/v2/studies?format=json&query.cond={condition}&query.locn={location}"
+def myfunc(condition, location, pagesize=10):
+    url = f"https://clinicaltrials.gov/api/v2/studies?format=json&query.cond={condition}&query.locn={location}&pageSize={pagesize}"
     
     response = requests.get(url)
     studies = response.json().get('studies', [])
@@ -30,7 +30,7 @@ def myfunc(condition, location):
         if not df.empty:
             center_lat = df['geoPoints'].iloc[0]['lat']
             center_lon = df['geoPoints'].iloc[0]['lon']
-            m = folium.Map(location=[center_lat, center_lon], zoom_start=6)
+            m = folium.Map(location=[center_lat, center_lon], zoom_start=1.5)
 
             marker_cluster = plugins.MarkerCluster().add_to(m)
             folium.plugins.Fullscreen(
@@ -52,7 +52,6 @@ def myfunc(condition, location):
 
             return m
         else:
-            st.error("No valid locations found in the data.")
             return None
 
     else:
