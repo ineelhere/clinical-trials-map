@@ -33,6 +33,12 @@ def myfunc(condition, location):
             m = folium.Map(location=[center_lat, center_lon], zoom_start=6)
 
             marker_cluster = plugins.MarkerCluster().add_to(m)
+            folium.plugins.Fullscreen(
+                position="topright",
+                title="Expand me",
+                title_cancel="Exit me",
+                force_separate_button=True,
+            ).add_to(m)
             for _, row in df.iterrows():
                 coords = [row['geoPoints']['lat'], row['geoPoints']['lon']]
                 tooltip = row['NCTid']
