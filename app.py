@@ -7,7 +7,7 @@ st.title("Clinical Trials Locator 🌐")
 condition = st.text_input("Enter a medical condition:", placeholder="Glioblastoma")
 location = st.text_input("Enter a location:", placeholder="Kolkata")
 
-if st.button("Find Clinical Trials 🔍"):
+if st.button("Find Clinical Trial Sites 🔍"):
     condition_input = condition.strip().lower() if condition else ""
     location_input = location.strip().lower() if location else ""
     
